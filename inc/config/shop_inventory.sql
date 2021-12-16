@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2020 at 01:54 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
+-- Generation Time: Dec 16, 2021 at 04:40 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -39,7 +38,7 @@ CREATE TABLE `customer` (
   `city` varchar(30) DEFAULT NULL,
   `district` varchar(30) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'Active',
-  `createdOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `createdOn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -69,9 +68,9 @@ CREATE TABLE `item` (
   `productID` int(11) NOT NULL,
   `itemNumber` varchar(255) NOT NULL,
   `itemName` varchar(255) NOT NULL,
-  `discount` float NOT NULL DEFAULT '0',
-  `stock` int(11) NOT NULL DEFAULT '0',
-  `unitPrice` float NOT NULL DEFAULT '0',
+  `discount` float NOT NULL DEFAULT 0,
+  `stock` int(11) NOT NULL DEFAULT 0,
+  `unitPrice` float NOT NULL DEFAULT 0,
   `imageURL` varchar(255) NOT NULL DEFAULT 'imageNotAvailable.jpg',
   `status` varchar(255) NOT NULL DEFAULT 'Active',
   `description` text NOT NULL
@@ -82,9 +81,9 @@ CREATE TABLE `item` (
 --
 
 INSERT INTO `item` (`productID`, `itemNumber`, `itemName`, `discount`, `stock`, `unitPrice`, `imageURL`, `status`, `description`) VALUES
-(34, '1', 'First Bag', 0, 28, 1500, '1525670999_1.png', 'Active', ''),
-(35, '2', 'School Bag', 0, 5, 500, '1525681111_661539.png', 'Active', ''),
-(36, '3', 'Office Bag', 0, 5, 1300, '1525709924_office bag.jpg', 'Active', ''),
+(34, '1', 'First Bag', 0, 30, 1500, '1525670999_1.png', 'Active', ''),
+(35, '2', 'School Bag', 0, 5, 500, '1525681111_661539.png', 'Active', 'This is normal school bag for senior secondary student'),
+(36, '3', 'Office Bag', 0, 5, 1300, '1525709924_office bag.jpg', 'Active', 'This is daily office bag'),
 (37, '4', 'Leather Bag', 2, 6, 3409, '1525710010_leather bag.jpg', 'Active', ''),
 (38, '5', 'Travel Bag', 2, 17, 1200, '1525706032_travel bag.jpg', 'Active', ''),
 (39, '6', 'Gym Bag', 0, 0, 3000, '1525710463_gym bag.jpg', 'Active', ''),
@@ -105,30 +104,11 @@ CREATE TABLE `purchase` (
   `itemNumber` varchar(255) NOT NULL,
   `purchaseDate` date NOT NULL,
   `itemName` varchar(255) NOT NULL,
-  `unitPrice` float NOT NULL DEFAULT '0',
-  `quantity` int(11) NOT NULL DEFAULT '0',
+  `unitPrice` float NOT NULL DEFAULT 0,
+  `quantity` int(11) NOT NULL DEFAULT 0,
   `vendorName` varchar(255) NOT NULL DEFAULT 'Test Vendor',
-  `vendorID` int(11) NOT NULL DEFAULT '0'
+  `vendorID` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `purchase`
---
-
-INSERT INTO `purchase` (`purchaseID`, `itemNumber`, `purchaseDate`, `itemName`, `unitPrice`, `quantity`, `vendorName`, `vendorID`) VALUES
-(39, '1', '2018-05-24', 'First Bag', 1600, 10, 'Johnson and Johnsons Co.', 3),
-(40, '2', '2018-05-18', 'First Bag', 2341, 2, 'Louise Vitton Bag', 4),
-(41, '4', '2018-05-07', 'Leather Bag', 1234, 3, 'Johnson and Johnsons Co.', 3),
-(42, '1', '2018-05-24', 'First Bag', 345, 12, 'Louise Vitton Bag', 4),
-(43, '5', '2018-05-03', 'Travel Bag', 35, 3, 'Johnson and Johnsons Co.', 3),
-(44, '5', '2018-05-16', 'Travel Bag', 3000, 2, 'ABC Company', 1),
-(45, '5', '2018-05-21', 'Travel Bag', 3000, 10, 'Sample Vendor 222', 2),
-(46, '4', '2018-05-19', 'Leather Bag', 1200, 4, 'Johnson and Johnsons Co.', 3),
-(47, '2', '2018-05-10', 'School Bag', 2, 1, 'Sample Vendor 222', 2),
-(48, '1', '2018-05-12', 'Handbag', 2, 9, 'ABC Company', 1),
-(50, '14', '2018-05-15', 'Hiking Bag', 1000, 5, 'Louise Vitton Bag', 4),
-(51, '11', '2018-05-11', 'First Aid Bag', 1121, 1, 'ABC Company', 1),
-(52, '1', '2018-05-21', 'First Bag', 1235, 2, 'Sample Vendor 222', 2);
 
 -- --------------------------------------------------------
 
@@ -143,33 +123,10 @@ CREATE TABLE `sale` (
   `customerName` varchar(255) NOT NULL,
   `itemName` varchar(255) NOT NULL,
   `saleDate` date NOT NULL,
-  `discount` float NOT NULL DEFAULT '0',
-  `quantity` int(11) NOT NULL DEFAULT '0',
-  `unitPrice` float(10,0) NOT NULL DEFAULT '0'
+  `discount` float NOT NULL DEFAULT 0,
+  `quantity` int(11) NOT NULL DEFAULT 0,
+  `unitPrice` float(10,0) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `sale`
---
-
-INSERT INTO `sale` (`saleID`, `itemNumber`, `customerID`, `customerName`, `itemName`, `saleDate`, `discount`, `quantity`, `unitPrice`) VALUES
-(1, '3', 4, 'Bill Gates', 'Office Bag', '2021-05-24', 5, 2, 1300),
-(2, '1', 39, 'Amal Silverton', 'First Bag', '2021-05-24', 0, 111, 1500),
-(3, '4', 18, 'Asitha Silva', 'Leather Bag', '2021-05-24', 2, 1, 3409),
-(4, '5', 25, 'Theresa May', 'Travel Bag', '2021-05-24', 2, 1, 1200),
-(5, '6', 24, 'Sunil Perera', 'Gym Bag', '2021-05-24', 0, 1, 3000),
-(6, '7', 14, 'Steve Jobs', 'Handbag', '2021-05-24', 1.5, 1, 1650),
-(7, '3', 4, 'Bill Gates', 'Office Bag', '2021-05-24', 0, 3, 1300),
-(8, '8', 4, 'Bill Gates', 'Laptop Bag', '2021-05-14', 2.1, 1, 2300),
-(9, '6', 26, 'Sachin Tendulkar', 'Gym Bag', '2021-05-14', 0, 1, 3000),
-(10, '5', 25, 'Theresa May', 'Travel Bag', '2021-05-14', 2, 9, 1200),
-(11, '10', 26, 'Sachin Tendulkar', 'Sports Bag', '2021-04-05', 1, 7, 1000),
-(12, '1', 14, 'Steve Jobs', 'First Bag', '2021-05-14', 0, 2, 1500),
-(13, '3', 38, 'Nuwan Perara', 'Office Bag', '2021-05-24', 0, 0, 1300),
-(14, '10', 39, 'Amal Silverton', 'Sports Bag', '2021-05-17', 1, 1, 1000),
-(15, '14', 38, 'Nuwan Perara', 'Hiking Bag', '2021-05-24', 1.5, 1, 1200),
-(16, '1', 14, 'Steve Jobs', 'First Bag', '2021-05-24', 10, 1, 1500),
-(17, '4', 14, 'Steve Jobs', 'Leather Bag', '2021-05-18', 2, 1, 3409);
 
 -- --------------------------------------------------------
 
@@ -190,9 +147,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`userID`, `fullName`, `username`, `password`, `status`) VALUES
-(5, 'Guest', 'guest', '81dc9bdb52d04dc20036dbd8313ed055', 'Active'),
-(6, 'a', 'a', '0cc175b9c0f1b6a831c399e269772661', 'Active'),
-(7, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Active');
+(7, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Active'),
+(8, 'Shubham', 'sarapapa', '86c1df40f2d006d94dac8d62fdbf7a55', 'Active');
 
 -- --------------------------------------------------------
 
@@ -211,22 +167,8 @@ CREATE TABLE `vendor` (
   `city` varchar(30) DEFAULT NULL,
   `district` varchar(30) NOT NULL,
   `status` varchar(255) NOT NULL DEFAULT 'Active',
-  `createdOn` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `createdOn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `vendor`
---
-
-INSERT INTO `vendor` (`vendorID`, `fullName`, `email`, `mobile`, `phone2`, `address`, `address2`, `city`, `district`, `status`, `createdOn`) VALUES
-(1, 'ABC Company', '', 2343567, 0, '80, Ground Floor, ABC Shopping Complex', '46th Avenue', 'Kolpetty', 'Colombo', 'Active', '2018-05-05 05:48:44'),
-(2, 'Sample Vendor 222', 'sample@volvo.com', 99828282, 283730183, '123, A Road, B avenue', 'Pitipana', 'Nugegoda', 'Mannar', 'Disabled', '2018-05-05 06:12:02'),
-(3, 'Johnson and Johnsons Co.', '', 32323, 0, '34, Malwatta Road, Kottawa', 'Pannipitiya', 'Maharagama', 'Colombo', 'Active', '2018-05-05 06:28:33'),
-(4, 'Louise Vitton Bag', 'vitton@vitton.usa.com', 323234938, 0, '45, Palmer Valley, 5th Crossing', 'Delaware', 'Palo Alto', 'Batticaloa', 'Active', '2018-05-05 06:29:41'),
-(6, 'Test Vendor', 'test@vendor.com', 43434, 47569937, 'Test address', 'Test address 2', 'Test City', 'Trincomalee', 'Active', '2018-05-05 06:53:14'),
-(7, 'Bags Co. Exporters Ltd.', '', 1111, 0, 'Sea Road, Bambalapitiya', '', '', 'Colombo', 'Active', '2018-05-15 10:36:54'),
-(8, 'New Bags Exporters', '', 191938930, 0, '123, A Road, B avenue, ', 'Gilford Crescent', 'Colpetty', 'Colombo', 'Active', '2018-05-16 12:36:53'),
-(9, 'A', 'a@gmail.com', 999995, 98866767, 'manila', 'Metro Manila', 'Manila City', 'Ampara', 'Active', '2020-07-30 11:40:25');
 
 --
 -- Indexes for dumped tables
@@ -288,7 +230,7 @@ ALTER TABLE `item`
 -- AUTO_INCREMENT for table `purchase`
 --
 ALTER TABLE `purchase`
-  MODIFY `purchaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `purchaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `sale`
@@ -300,7 +242,7 @@ ALTER TABLE `sale`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `vendor`
