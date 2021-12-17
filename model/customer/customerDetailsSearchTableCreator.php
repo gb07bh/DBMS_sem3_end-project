@@ -23,7 +23,7 @@
 				</thead>
 				<tbody>';
 	
-	// Create table rows from the selected data
+	
 	while($row = $customerDetailsSearchStatement->fetch(PDO::FETCH_ASSOC)){
 		$output .= '<tr>' .
 						'<td>' . $row['customerID'] . '</td>' .

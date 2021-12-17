@@ -11,17 +11,15 @@
 			
 			if(!empty($itemImageItemNumber)){
 					
-				// Sanitize item number
+				
 				$itemImageItemNumber = filter_var($itemImageItemNumber, FILTER_SANITIZE_STRING);
 				
-				// Check if itemNumber is in DB
+				
 				$itemNumberSql = 'SELECT * FROM item WHERE itemNumber = :itemNumber';
 				$itemNumberStatement = $conn->prepare($itemNumberSql);
 				$itemNumberStatement->execute(['itemNumber' => $itemImageItemNumber]);
 				
 				if($itemNumberStatement->rowCount() > 0){
-					// Item is in the DB, hence proceed to next steps	
-					// Update image url in item table to the default image
 					$updateImageUrlSql = "UPDATE item SET imageURL = 'imageNotAvailable.jpg' WHERE itemNumber = :itemNumber";
 					$updateImageUrlStatement = $conn->prepare($updateImageUrlSql);
 					$updateImageUrlStatement->execute(['itemNumber' => $itemImageItemNumber]);
