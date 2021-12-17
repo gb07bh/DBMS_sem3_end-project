@@ -12,20 +12,6 @@ START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `shop_inventory`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customer`
---
 
 CREATE TABLE `customer` (
   `customerID` int(11) NOT NULL,
@@ -41,9 +27,7 @@ CREATE TABLE `customer` (
   `createdOn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `customer`
---
+
 
 INSERT INTO `customer` (`customerID`, `fullName`, `email`, `mobile`, `phone2`, `address`, `address2`, `city`, `district`, `status`, `createdOn`) VALUES
 (4, 'Bill Gates', 'bill@microsoft.com', 993737, 772484884, '45, Palo Alto House, Marine Drive', 'South Carolina', 'Microsoft', 'Kurunegala', 'Active', '2018-04-30 15:14:02'),
@@ -58,11 +42,6 @@ INSERT INTO `customer` (`customerID`, `fullName`, `email`, `mobile`, `phone2`, `
 (41, 'Mark Taylor', '', 111, 0, '111', '', '', 'Colombo', 'Active', '2018-05-13 01:24:54'),
 (42, 'Nelson Mandela', 'sjobs@apple.com', 333829832, 0, '1st Floor, Apple House, ', 'Las Vegas Street', 'Las Vegas', 'Kalutara', 'Disabled', '2018-05-13 02:39:41');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `item`
---
 
 CREATE TABLE `item` (
   `productID` int(11) NOT NULL,
@@ -76,9 +55,6 @@ CREATE TABLE `item` (
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `item`
---
 
 INSERT INTO `item` (`productID`, `itemNumber`, `itemName`, `discount`, `stock`, `unitPrice`, `imageURL`, `status`, `description`) VALUES
 (34, '1', 'First Bag', 0, 30, 1500, '1525670999_1.png', 'Active', ''),
@@ -93,11 +69,6 @@ INSERT INTO `item` (`productID`, `itemNumber`, `itemName`, `discount`, `stock`, 
 (45, '11', 'First Aid Bag', 1.5, 11, 1200, '1525787551_first aid bag.jpg', 'Active', ''),
 (49, '14', 'Hiking Bag', 1.5, 6, 1200, '1526297640_hiking bag.jpg', 'Active', 'This is a hiking bag. Ideal for long distance hikes. Light-weight and water proof.');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `purchase`
---
 
 CREATE TABLE `purchase` (
   `purchaseID` int(11) NOT NULL,
@@ -110,11 +81,6 @@ CREATE TABLE `purchase` (
   `vendorID` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `sale`
---
 
 CREATE TABLE `sale` (
   `saleID` int(11) NOT NULL,
@@ -128,11 +94,6 @@ CREATE TABLE `sale` (
   `unitPrice` float(10,0) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
 
 CREATE TABLE `user` (
   `userID` int(11) NOT NULL,
@@ -142,19 +103,11 @@ CREATE TABLE `user` (
   `status` varchar(255) NOT NULL DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `user`
---
 
 INSERT INTO `user` (`userID`, `fullName`, `username`, `password`, `status`) VALUES
 (7, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Active'),
 (8, 'Shubham', 'sarapapa', '86c1df40f2d006d94dac8d62fdbf7a55', 'Active');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `vendor`
---
 
 CREATE TABLE `vendor` (
   `vendorID` int(11) NOT NULL,
@@ -170,87 +123,42 @@ CREATE TABLE `vendor` (
   `createdOn` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Indexes for dumped tables
---
 
---
--- Indexes for table `customer`
---
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`customerID`);
 
---
--- Indexes for table `item`
---
 ALTER TABLE `item`
   ADD PRIMARY KEY (`productID`);
 
---
--- Indexes for table `purchase`
---
 ALTER TABLE `purchase`
   ADD PRIMARY KEY (`purchaseID`);
 
---
--- Indexes for table `sale`
---
 ALTER TABLE `sale`
   ADD PRIMARY KEY (`saleID`);
 
---
--- Indexes for table `user`
---
 ALTER TABLE `user`
   ADD PRIMARY KEY (`userID`);
 
---
--- Indexes for table `vendor`
---
+
 ALTER TABLE `vendor`
   ADD PRIMARY KEY (`vendorID`);
 
---
--- AUTO_INCREMENT for dumped tables
---
 
---
--- AUTO_INCREMENT for table `customer`
---
 ALTER TABLE `customer`
   MODIFY `customerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
---
--- AUTO_INCREMENT for table `item`
---
 ALTER TABLE `item`
   MODIFY `productID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
---
--- AUTO_INCREMENT for table `purchase`
---
 ALTER TABLE `purchase`
   MODIFY `purchaseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
---
--- AUTO_INCREMENT for table `sale`
---
 ALTER TABLE `sale`
   MODIFY `saleID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
---
--- AUTO_INCREMENT for table `user`
---
 ALTER TABLE `user`
   MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
---
--- AUTO_INCREMENT for table `vendor`
---
 ALTER TABLE `vendor`
   MODIFY `vendorID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
